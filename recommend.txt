@@ -1,0 +1,9 @@
+done!
+484
+Recommending 5 products similar to "## 3/16 ### toc theme > inside function but it need mock code > VS > extand function but not general"...
+-------
+Recommended: "### go ``` type struct struct func (s *struct) function() {     ... }" (score:0.04945344091592782)
+Recommended: "#### Environment (score:0.04697628129775379)
+Recommended: "#### Meaningful naming #### python #### Basic (score:0.043751812750972306)
+Recommended: "## 5/17 > make toy project code review team > 10 >= people. > personal toy project need code review." (score:0.04107852800260336)
+Recommended: "#### blog (score:0.036948700349067345)
