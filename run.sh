@@ -8,8 +8,9 @@ go test
     # parsing.go makeCSV()
 
 # Get Content
-cd ~/workspace/reminder
-python3 recommender_system.py > recommend.txt
+cd ~/workspace/reminder/recommender
+docker build -t recommender .
+docker run --rm recommender > ../recommend.txt
 
 # Get Tagline
     # parsing.go getTagline(recommend.txt) return tag, tagline, file

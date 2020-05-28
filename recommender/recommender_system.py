@@ -4,7 +4,7 @@ from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import linear_kernel
 
 results = {}
-ds = pd.read_csv("./parsing/tags.csv")
+ds = pd.read_csv("./tags.csv")
 def contentBasedRecommend():
     tf = TfidfVectorizer(analyzer='word', ngram_range=(1, 3), min_df=0, stop_words='english')
     tfidf_matrix = tf.fit_transform(ds['description'])

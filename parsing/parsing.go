@@ -123,7 +123,7 @@ func makeCSVForm(tags []string) ([][]string, error) {
 }
 
 func toCSV(tags []string) error {
-	file, err := os.OpenFile("tags.csv", os.O_RDWR, 0755)
+	file, err := os.OpenFile("../tags.csv", os.O_RDWR, 0755)
 	if err != nil {
 		log.Fatal(err)
 		return err

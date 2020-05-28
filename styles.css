@@ -21,6 +21,11 @@ body {
     */
     background-color: var(--main-color, var(--second-color));
     color: var(--second-color);
+    max-width: 900px;
+    margin: 1rem auto;
+    padding: 1rem;
+    font-size: 1rem;
+    font-family: ibm plex mono,monospace;
 }
 
 h1 {
@@ -30,6 +35,11 @@ h1 {
 
 p {
     color: var(--second-color, var(--main-color));
+    /*font-family: 'Lora', 'Times New Roman', serif;*/
+}
+
+a {
+    color: #8ad7ee;
 }
 
 @media (prefers-color-scheme: light) {
