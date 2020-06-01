@@ -36,7 +36,7 @@ def recommend(item_id, num):
 def getRecommend():
     contentBasedRecommend()
     num = random.randrange(len(ds))
-    value = recommend(item_id=num, num=5)
-    return {'message': value}
+    recommend(item_id=num, num=5)
+    print("wasm.shdkej.com")
 
 getRecommend()

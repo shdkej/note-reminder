@@ -1,14 +1,15 @@
 #!/bin/bash
 
 # Get Note File
-cd ~/workspace/reminder/parsing
+cd ~/workspace/note-reminder/parsing
 go test
 
 # Update CSV File
     # parsing.go makeCSV()
 
 # Get Content
-cd ~/workspace/reminder/recommender
+cd ~/workspace/note-reminder/recommender
+cp ../tags.csv ./
 docker build -t recommender .
 docker run --rm recommender > ../recommend.txt
 
@@ -22,7 +23,7 @@ docker run --rm recommender > ../recommend.txt
 ### Render {Title, Content, File} -> <a href="static-site">Title</a>
 # Send Telegram
 # sqs.go sendSQS(recommend.txt)
-cd ~/workspace/reminder/note-aws-manager
+cd ~/workspace/note-reminder/note-aws-manager
 go test
 
 # Send S3

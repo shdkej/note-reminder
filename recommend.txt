@@ -1,8 +1,9 @@
 done!
-Recommending 5 products similar to "#### 충전 무선충전   고속충전   usb c   갤럭시워치 세워지는 단독 무선충전기를 사느냐   보조배터리와 무선충전기 같이 되있는 것을 사느냐"...
+Recommending 5 products similar to "#### vim window size...
 -------
-Recommended: "#### 가방 Usb 단자" (score:0.04732108818824973)
-Recommended: "## 5/27 #### ubuntu -> kubuntu (score:0.032843681959192204)
-Recommended: "#### 개발의  목표 개발을  하면  사용자가  원하는  것을  그대로  맞춰주는  것도  중요하지만" (score:0.015455782032611559)
-Recommended: "## 조금씩  꾸준히 한  분야의  전문가가  되기  위해서는  많은  공부와  끊임없는  연구, 새로운  것을  찾는  탐험이  필요하다" (score:0.01296678129641849)
-Recommended: "#### 블록체인의 암호화폐는 익명이어야 하나?   (score:0.012179805378569587)
+Recommended: "## WINDOW" (score:0.3525606514685888)
+Recommended: "### side toc convert size 15" full-size 1900 half-size 950     content full-size 1170         middle-size 750         mobile-size 780" (score:0.19586324534670427)
+Recommended: "## 3/17 (score:0.061762729735672775)
+Recommended: "#### Blog (score:0.06134264284300025)
+Recommended: "#### 상용구 Email ctrl + j " (score:0.060068822941844596)
+wasm.shdkej.com

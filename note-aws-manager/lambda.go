@@ -23,7 +23,7 @@ func getTelegram() error {
 	return nil
 }
 
-func uploadS3(filepath string) error {
+func uploadS3(bucket string, filepath string) error {
 	sess, err := session.NewSession(&aws.Config{
 		Region: aws.String("eu-central-1")},
 	)
@@ -40,19 +40,25 @@ func uploadS3(filepath string) error {
 	}
 	defer file.Close()
 
+	log.Println("File Upload: ", filepath)
+
 	_, err = svc.Upload(&s3manager.UploadInput{
-		Bucket: aws.String("my-note-0.0.1"),
-		Key:    aws.String("note/tags.csv"),
+		Bucket: aws.String(bucket),
+		Key:    aws.String("note/" + filepath),
 		Body:   file,
 	})
 	if err != nil {
 		log.Fatal(err)
 		return err
 	}
+	log.Println("File Upload Complete")
 	return nil
 }
 
 func sendSqs(message string) error {
+	if message == "" {
+		message = "message is empty"
+	}
 	sess, err := session.NewSession(&aws.Config{
 		Region: aws.String("eu-central-1")},
 	)
