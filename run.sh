@@ -1,17 +1,17 @@
 #!/bin/bash
 
 # Get Note File
-cd ~/workspace/note-reminder/parsing
-go test
 
-# Update CSV File
-    # parsing.go makeCSV()
+docker-compose up -d
 
-# Get Content
 cd ~/workspace/note-reminder/recommender
 cp ../tags.csv ./
 docker build -t recommender .
-docker run --rm recommender > ../recommend.txt
+docker run --rm recommender
+
+# Update CSV File
+
+# Get Content
 
 # Get Tagline
     # parsing.go getTagline(recommend.txt) return tag, tagline, file
@@ -22,11 +22,7 @@ docker run --rm recommender > ../recommend.txt
 
 ### Render {Title, Content, File} -> <a href="static-site">Title</a>
 # Send Telegram
-# sqs.go sendSQS(recommend.txt)
-cd ~/workspace/note-reminder/note-aws-manager
-go test
 
 # Send S3
-    # lambda.go uploadS3()
 
 # Telegram -> Web

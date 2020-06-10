@@ -1,9 +1,9 @@
 done!
-Recommending 5 products similar to "#### vim window size...
+Recommending 5 products similar to "## ubuntu font...
 -------
-Recommended: "## WINDOW" (score:0.3525606514685888)
-Recommended: "### side toc convert size 15" full-size 1900 half-size 950     content full-size 1170         middle-size 750         mobile-size 780" (score:0.19586324534670427)
-Recommended: "## 3/17 (score:0.061762729735672775)
-Recommended: "#### Blog (score:0.06134264284300025)
-Recommended: "#### 상용구 Email ctrl + j " (score:0.060068822941844596)
+Recommended: "## font broken (score:0.1641849852482926)
+Recommended: "## Font (score:0.11478143197969526)
+Recommended: "## docker cache update (score:0.07853808230228879)
+Recommended: "## what kind of fonts are not custom web fonts? (score:0.06630265355778739)
+Recommended: "## to-do-list     auto create todo list when write todo?     if done write a weekly note, remove that in a todo list     todo organize main-todo menu automatically     how to manage bookmark     make todo.txt parsing and done button     > to-do-list (score:0.061734040480092366)
 wasm.shdkej.com

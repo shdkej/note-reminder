@@ -1,0 +1,14 @@
+version: "2"
+services:
+  go-parser:
+    container_name: go-parser
+    image: golang:1.13
+    volumes:
+      - ~/vimwiki:/vimwiki
+      - ./:/src/
+      - ~/.aws:/root/.aws
+    environment:
+      - CSV_PATH=/src/tags.csv
+      - VIMWIKI=/vimwiki
+    working_dir: /src/parsing
+    command: go test
