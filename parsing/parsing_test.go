@@ -24,9 +24,10 @@ var _ = Describe("Parsing tag, tagline and make csv", func() {
 		})
 	})
 	Context("Test Parsing", func() {
-		taglines, err := getTaglineAll()
-		It("get tagline all", func() {
-			Expect(taglines[0]).NotTo(BeNil())
+		filename := "/home/sh/vimwiki/Data_Structure.md"
+		taglines, err := getTaglines(filename)
+		It("get taglines", func() {
+			Expect(taglines).NotTo(BeNil())
 			Expect(err).Should(BeNil())
 		})
 		tag := getTag(taglines[0])
