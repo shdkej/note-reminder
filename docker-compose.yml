@@ -1,4 +1,4 @@
-version: "2"
+version: "3"
 services:
   go-parser:
     container_name: go-parser
@@ -7,8 +7,21 @@ services:
       - ~/vimwiki:/vimwiki
       - ./:/src/
       - ~/.aws:/root/.aws
+      - ./result/:/result
     environment:
-      - CSV_PATH=/src/tags.csv
+      - CSV_PATH=/result/tags.csv
       - VIMWIKI=/vimwiki
     working_dir: /src/parsing
     command: go test
+
+  content-recommender:
+    build: ./recommender
+    command: python3 recommender_system.py
+    volumes:
+      - ./result:/result
+    environment:
+      - CSV_PATH=/result/tags.csv
+      - TELEGRAM_CHAT_ID=433493318
+      - TELEGRAM_TOKEN=1108419102:AAE_apfPb95EjB07pOe1w4aEmXNflOWvWzU
+    depends_on:
+      - go-parser

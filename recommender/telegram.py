@@ -2,9 +2,6 @@
 import json
 import os
 import requests
-import logging
-from dotenv import load_dotenv
-load_dotenv()
 
 CHAT_ID = os.environ['TELEGRAM_CHAT_ID']
 TOKEN = os.environ['TELEGRAM_TOKEN']
@@ -18,15 +15,13 @@ def send_message(message):
         for m in message:
             strMessage += m
             strMessage += "\n"
-    data = {"text": strMessage.encode("utf8"), "chat_id": CHAT_ID}
+    data = {"text": strMessage.encode("utf8"), "chat_id": CHAT_ID, "parse_mode":"Markdown"}
     requests.post(url, data)
+    print("Send complete")
 
-def read_file():
+def read_file(filepath):
     data = ''
-    with open('recommend.txt') as f:
+    with open(filepath) as f:
         data += f.read()
 
     send_message(data)
-
-
-read_file()

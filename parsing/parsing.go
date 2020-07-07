@@ -15,7 +15,8 @@ type Tags struct {
 	tag  string
 }
 
-var tagPrefix = "##"
+const tagPrefix = "#"
+
 var wikiDir = os.Getenv("VIMWIKI")
 
 func getTag(tagline string) string {
@@ -59,7 +60,7 @@ func getTaglines(filename string) ([]string, error) {
 		return result, err
 	}
 
-	ss := strings.Split(string(val), "\n\n")
+	ss := strings.Split(string(val), "\n\n"+tagPrefix)
 	for _, s := range ss {
 		if strings.HasPrefix(s, tagPrefix) {
 			result = append(result, s)
@@ -75,7 +76,7 @@ func makeCSVForm(tags []string) ([][]string, error) {
 	// if i saw the tag.
 	// change current
 	for i := range result {
-		tag := strings.ReplaceAll(tags[i], "\n", " ")
+		tag := strings.ReplaceAll(tags[i], "\n", "==")
 		//tag = "\"" + tag + "\""
 		result[i] = []string{strconv.Itoa(i), tag}
 	}

@@ -1,50 +1,64 @@
-- [ ] vpc
+## Goal
+Remind My note tag list
+
+## Usage
+1. Set Note Folder
+2. Set variable (for serverless)
+3. build
+    - local
+        - `sh run.sh`
+    - serverless
+        - `sh remote.sh`
+ 
+#### TODO
 - [x] parsing tag
-    - [x] parsing tag line
 - [x] send telegram
 - [x] send sqs
 - [x] sqs to lambda
-- [ ] sqs setting
-- [ ] check sqs, lambda communication speed
-- [ ] put elasticsearch
-- [ ] search suggestion
-- [x] golang elasticsearch
-    - [ ] what is context?
 - [x] make index file
-- [ ] update score, weight
-- [ ] get 5 list each other, in recent, keyword search, date search
-    - keyword search: find recent search history data
-- [ ] scaling weight by every day
-- [x] cron every day
-- [ ] data initial & update
-- [ ] tag, tagline match conflict content check
-- [ ] save tag with file
-- [ ] date link cannot access link
-- [ ] if search tag, show relate tag
-- [ ] python recommend program, csv file to s3, 
-- go-update -> csv update -> s3 upload -> lambda call(python) -> go web update and send telegram
+- [X] tag, tagline match conflict content check
+- [X] save tag with file
+- [X] python recommend program, csv file to s3, 
 - [x] mget err check
+- [.] cron every day
+- [ ] set vpc
+- [ ] find date link cannot access link
+- [ ] if search tag, show relate tag
 - [ ] make tagline parsing algorithm better
-- [ ] go wasm <-> go server grpc
+- [ ] parsing - s3 upload in local (Need Automation)
+- [ ] error monitoring
 
-#### Goal
-Remind My note tag list
+#### Problem
+- Even though small architecture. it has chaotic. hard to managing
+- every service need fail control
+- How to monitoring error?
 
-#### Architecture
-Parsing - Dynamodb - elasticsearch - lambda - telegram
-and show remind list in web.
-and remind content + suggestion content
+#### Architecture (Serverless)
+- ~~Parsing - elasticsearch - dynamodb - lambda - telegram~~
+- parsing(local) - s3 - sns - lambda (- sqs - lambda)
+    -> github push - s3 
+    -> parsing(cron) - s3 - sns - lambda
+- And show remind list in web.
+- And remind content + suggestion content
 
-#### Test
-parsing - redis - elasticsearch - api - api
+#### Test (Local)
+- ~~parsing - redis - elasticsearch - api - api~~
+- parsing - make csv file - python recommender - send telegram
+- docker-compose
 
 #### Parsing data
 - Note file
 - Search History
 
-#### Crawling
-- read file and store to redis
-- elasticsearch get in redis
+#### Data Type
+- [Tag head, Tag body, File name, Hits, Updated date]
+- Hash Map
+- access from tag head. find tag body
+- access from index
+- don't need ordered, thread safe
+- memory size is not priority
+- keys can duplicates
+- mutable
 
 #### Mechanism
 - state repetition
@@ -55,3 +69,4 @@ parsing - redis - elasticsearch - api - api
     - last read
     - last update
     - weight
+- Content Based Recommend

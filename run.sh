@@ -4,11 +4,6 @@
 
 docker-compose up -d
 
-cd ~/workspace/note-reminder/recommender
-cp ../tags.csv ./
-docker build -t recommender .
-docker run --rm recommender
-
 # Update CSV File
 
 # Get Content
