@@ -24,7 +24,10 @@ var _ = Describe("Parsing tag, tagline and make csv", func() {
 		})
 	})
 	Context("Test Parsing", func() {
-		filename := "/home/sh/vimwiki/Data_Structure.md"
+		if wikiDir == "" {
+			wikiDir = "/home/sh/vimwiki"
+		}
+		filename := wikiDir + "/Data_Structure.md"
 		taglines, err := getTaglines(filename)
 		It("get taglines", func() {
 			Expect(taglines).NotTo(BeNil())
@@ -33,12 +36,6 @@ var _ = Describe("Parsing tag, tagline and make csv", func() {
 		tag := getTag(taglines[0])
 		It("get tag from tagline", func() {
 			Expect(tag).NotTo(Equal("error"))
-		})
-	})
-	Context("Test Upload S3", func() {
-		It("upload s3 tags csv", func() {
-			bucket := "my-note-0.0.1"
-			Expect(uploadS3(bucket, "../tags.csv")).Should(BeNil())
 		})
 	})
 })

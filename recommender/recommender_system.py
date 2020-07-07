@@ -2,9 +2,13 @@ import pandas as pd
 import random
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import linear_kernel
+import os
+from telegram import send_message
 
+CSV_PATH = os.environ['CSV_PATH']
 results = {}
-ds = pd.read_csv("./tags.csv")
+ds = pd.read_csv(CSV_PATH)
+
 def contentBasedRecommend():
     tf = TfidfVectorizer(analyzer='word', ngram_range=(1, 3), min_df=0, stop_words='english')
     tfidf_matrix = tf.fit_transform(ds['description'])
@@ -24,19 +28,26 @@ def item(id):
 
 # Just reads the results out of the dictionary.
 def recommend(item_id, num):
-    print("Recommending " + str(num) + " products similar to " + item(item_id) + "...")
-    print("-------")
     recs = results[item_id][:num]
     result = []
+    result.append("Recommending about -- " + item(item_id))
+    result.append("-------------------\n")
     for rec in recs:
-        print("Recommended: " + item(rec[1]) + " (score:" + str(rec[0]) + ")")
         result.append(item(rec[1]))
     return result
 
 def getRecommend():
     contentBasedRecommend()
     num = random.randrange(len(ds))
-    recommend(item_id=num, num=5)
-    print("wasm.shdkej.com")
+    result_array = recommend(item_id=num, num=5)
+    message = setOutput(result_array)
+    send_message(message)
+
+def setOutput(content):
+    body = list(map(lambda b: b.replace("==", "\n"), content))
+    result = list(map(lambda a: "*" + a.split("\n", 1)[0] + "*\n" + a.split("\n", 1)[-1], body))
+    result.append("wasm.shdkej.com")
+    return result
+
 
 getRecommend()
