@@ -23,12 +23,12 @@ jobs:
       uses: actions/checkout@v2
       
     - name: Test
-      run: |
-        go mod init github.com/shdkej/note-reminder/lambda
-        go test -v ./lambda
       env:
         AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
         AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+      run: |
+        go mod init github.com/shdkej/note-reminder/lambda
+        go test -v ./lambda
 
     - name: docker compose test
       run: docker-compose up
