@@ -29,6 +29,3 @@ jobs:
       run: |
         go mod init github.com/shdkej/note-reminder/lambda
         go test -v ./lambda
-
-    - name: docker compose test
-      run: docker-compose up
