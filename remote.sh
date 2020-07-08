@@ -1,3 +1,3 @@
 #!/bin/bash
 
-git status
+cd lambda && go test 

@@ -6,9 +6,10 @@ import (
 	"github.com/aws/aws-sdk-go/service/s3/s3manager"
 	"log"
 	"os"
+	"path/filepath"
 )
 
-func uploadS3(bucket string, filepath string) error {
+func uploadS3(bucket string, path string) error {
 	sess, err := session.NewSession(&aws.Config{
 		Region: aws.String("eu-central-1")},
 	)
@@ -18,18 +19,19 @@ func uploadS3(bucket string, filepath string) error {
 	}
 	svc := s3manager.NewUploader(sess)
 
-	file, err := os.Open(filepath)
+	file, err := os.Open(path)
 	if err != nil {
 		log.Fatal(err)
 		return err
 	}
 	defer file.Close()
 
-	log.Println("File Upload: ", filepath)
+	log.Println("File Upload: ", path)
 
+	filename := filepath.Base(path)
 	_, err = svc.Upload(&s3manager.UploadInput{
 		Bucket: aws.String(bucket),
-		Key:    aws.String("note/" + filepath),
+		Key:    aws.String(filename),
 		Body:   file,
 	})
 	if err != nil {
