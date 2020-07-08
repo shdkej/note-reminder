@@ -29,6 +29,7 @@ jobs:
         wget https://releases.hashicorp.com/terraform/"$tf_version"/terraform_"$tf_version"_linux_amd64.zip
         unzip terraform_"$tf_version"_linux_amd64.zip
         sudo mv terraform /usr/local/bin/
+        rm -f terraform_"$tf_version"_linux_amd64.zip
         
     - name: Verify Terraform version
       run: terraform --version
@@ -41,11 +42,10 @@ jobs:
 
     - name: Terraform validation
       id: valid
-      run: terraform validate > report.txt
+      run: terraform validate
 
     - name: Create Pull Request
       uses: peter-evans/create-pull-request@v2
       with:
         token: ${{ secrets.GITHUB_TOKEN }}
         labels: test
-        body: cat report.txt
