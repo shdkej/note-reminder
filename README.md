@@ -40,6 +40,7 @@ Remind My note tag list
     -> parsing(cron) - s3 - sns - lambda
 - And show remind list in web.
 - And remind content + suggestion content
+- [telegram bot with serverless](https://github.com/shdkej/my-telegram-bot)
 
 #### Test (Local)
 - ~~parsing - redis - elasticsearch - api - api~~
