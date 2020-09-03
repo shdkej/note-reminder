@@ -9,7 +9,7 @@ Remind My note tag list
         - `sh run.sh`
     - serverless
         - `sh remote.sh`
- 
+
 #### TODO
 - [x] parsing tag
 - [x] send telegram
@@ -18,11 +18,10 @@ Remind My note tag list
 - [x] make index file
 - [X] tag, tagline match conflict content check
 - [X] save tag with file
-- [X] python recommend program, csv file to s3, 
-- [x] mget err check
-- [.] cron every day
+- [X] python recommend program, csv file to s3,
+- [X] mget err check
+- [X] cron every day
 - [ ] set vpc
-- [ ] find date link cannot access link
 - [ ] if search tag, show relate tag
 - [ ] make tagline parsing algorithm better
 - [ ] parsing - s3 upload in local (Need Automation)
@@ -35,9 +34,10 @@ Remind My note tag list
 
 #### Architecture (Serverless)
 - ~~Parsing - elasticsearch - dynamodb - lambda - telegram~~
-- parsing(local) - s3 - sns - lambda (- sqs - lambda)
-    -> github push - s3 
-    -> parsing(cron) - s3 - sns - lambda
+- source: github, s3, local
+- github push - Parsing - s3
+-    -> Execute with aws cron -> Get S3 CSV file -> Call lambda(CBR)
+-    -> (sqs - lambda(telegram))
 - And show remind list in web.
 - And remind content + suggestion content
 - [telegram bot with serverless](https://github.com/shdkej/my-telegram-bot)
@@ -64,7 +64,7 @@ Remind My note tag list
 #### Mechanism
 - state repetition
     - oldest update file send
-    - 7-30-365 date 
+    - 7-30-365 date
 - Data
     - name
     - last read
