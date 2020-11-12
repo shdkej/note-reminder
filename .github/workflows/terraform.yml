@@ -45,7 +45,7 @@ jobs:
 
     - name: Make csv file
       env:
-        VIMWIKI: shdkej.github.io/content/
+        VIMWIKI: ${{ GITHUB_WORKSPACE }}/shdkej.github.io/content/
         CSV_PATH: ./result/tags.csv
       run: |
         git clone https://github.com/shdkej/shdkej.github.io
