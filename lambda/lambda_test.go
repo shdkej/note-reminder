@@ -8,7 +8,7 @@ import (
 
 func TestParsing(t *testing.T) {
 	RegisterFailHandler(Fail)
-	RunSpecs(t, "Cloud Test")
+	RunSpecs(t, "Parsing Test")
 }
 
 var _ = Describe("AWS execute test", func() {

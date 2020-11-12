@@ -2,13 +2,18 @@
 Remind My note tag list
 
 ## Usage
-1. Set Note Folder
+1. Set Note Folder in `docker-compose.yml` 7 line.
 2. Set variable (for serverless)
 3. build
     - local
-        - `sh run.sh`
+        - set environment for telegram
+        - `export TELEGRAM_CHAT_ID=<Telegram chat id>`
+        - `export TELEGRAM_TOKEN=<Telegram token>`
+        - `docker-compose up`
     - serverless
-        - `sh remote.sh`
+        - local run first
+        - set github secret for aws
+        - `git push origin master`
 
 #### TODO
 - [x] parsing tag
@@ -21,7 +26,7 @@ Remind My note tag list
 - [X] python recommend program, csv file to s3,
 - [X] mget err check
 - [X] cron every day
-- [ ] set vpc
+- [ ] github action for make csv and upload to s3
 - [ ] if search tag, show relate tag
 - [ ] make tagline parsing algorithm better
 - [ ] parsing - s3 upload in local (Need Automation)
@@ -31,11 +36,11 @@ Remind My note tag list
 - Even though small architecture. it has chaotic. hard to managing
 - every service need fail control
 - How to monitoring error?
+- note is not synchronize with local
 
 #### Architecture (Serverless)
 - ~~Parsing - elasticsearch - dynamodb - lambda - telegram~~
-- source: github, s3, local
-- github push - Parsing - s3
+- github push - local note Parsing - s3
 -    -> Execute with aws cron -> Get S3 CSV file -> Call lambda(CBR)
 -    -> (sqs - lambda(telegram))
 - And show remind list in web.
@@ -44,17 +49,16 @@ Remind My note tag list
 
 #### Test (Local)
 - ~~parsing - redis - elasticsearch - api - api~~
-- parsing - make csv file - python recommender - send telegram
-- docker-compose
+- docker-compose up -> parsing -> make csv file -> python recommender -> send telegram
 
 #### Parsing data
 - Note file
 - Search History
 
 #### Data Type
-- [Tag head, Tag body, File name, Hits, Updated date]
+- [Tag Title, Tag body, File name, Hits, Updated date]
 - Hash Map
-- access from tag head. find tag body
+- access from tag title. find tag body
 - access from index
 - don't need ordered, thread safe
 - memory size is not priority

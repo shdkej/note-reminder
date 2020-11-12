@@ -16,7 +16,3 @@ terraform {
     region = "eu-central-1"
   }
 }
-
-//module "shdkej-network" {
-//  source = "../aws_network"
-//}
