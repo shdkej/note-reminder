@@ -43,13 +43,23 @@ jobs:
       id: valid
       run: terraform validate
 
+    - name: Make csv file
+      env:
+        VIMWIKI: shdkej.github.io/content/
+        CSV_PATH: ./result/tags.csv
+      run: |
+        git clone https://github.com/shdkej/shdkej.github.io
+        cd parsing
+        go test
+
     - name: Upload csv file
       env:
         AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
         AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
       run: |
-        cd lambda
+        cd ../lambda
         go test
+        rm $CSV_PATH
 
     - name: Create Pull Request
       uses: peter-evans/create-pull-request@v2

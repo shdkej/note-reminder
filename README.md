@@ -38,6 +38,8 @@ Remind My note tag list
 - How to monitoring error?
 - note is not synchronize with local
 
+result only exist local -> s3. how to make on github
+
 #### Architecture (Serverless)
 - ~~Parsing - elasticsearch - dynamodb - lambda - telegram~~
 - github push - local note Parsing - s3
