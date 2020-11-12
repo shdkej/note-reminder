@@ -43,12 +43,14 @@ jobs:
       id: valid
       run: terraform validate
 
+    - name: Get Note Directory
+      run: git clone https://github.com/shdkej/shdkej.github.io
+
     - name: Make csv file
       env:
         VIMWIKI: $GITHUB_WORKSPACE/shdkej.github.io/content
         CSV_PATH: $GITHUB_WORKSPACE/result/tags.csv
       run: |
-        git clone https://github.com/shdkej/shdkej.github.io
         cd parsing
         go test
         rm -r $GITHUB_WORKSPACE/shdkej.github.io
