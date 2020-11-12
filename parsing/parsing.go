@@ -31,9 +31,6 @@ func getTag(tagline string) string {
 
 func getTaglineAll() ([]string, error) {
 	result := []string{}
-	if wikiDir == "" {
-		wikiDir = "/home/sh/vimwiki"
-	}
 	err := filepath.Walk(wikiDir, func(path string, info os.FileInfo, err error) error {
 		if filepath.Ext(path) != ".md" {
 			return nil
@@ -59,7 +56,6 @@ func getTaglines(filename string) ([]string, error) {
 	if err != nil {
 		return result, err
 	}
-	log.Println("File name: ", filename)
 
 	ss := strings.Split(string(val), "\n\n"+tagPrefix)
 	for _, s := range ss {
@@ -68,6 +64,13 @@ func getTaglines(filename string) ([]string, error) {
 		}
 	}
 	return result, nil
+}
+
+func getNoteDir() error {
+	if wikiDir == "" {
+		wikiDir = "/home/sh/vimwiki"
+	}
+	return nil
 }
 
 func makeCSVForm(tags []string) ([][]string, error) {
