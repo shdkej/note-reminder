@@ -6,7 +6,6 @@ services:
     volumes:
       - ~/wiki-blog/content:/vimwiki
       - ./:/src/
-      - ~/.aws:/root/.aws
       - ./result/:/result
     environment:
       - CSV_PATH=/result/tags.csv
