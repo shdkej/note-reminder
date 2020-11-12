@@ -32,6 +32,7 @@ var _ = Describe("Parsing tag, tagline and make csv", func() {
 		taglines, err := getTaglines(filename)
 		It("get taglines", func() {
 			Expect(taglines).NotTo(BeNil())
+			Expect(len(taglines)).NotTo(Equal(0))
 			Expect(err).Should(BeNil())
 		})
 		tag := getTag(taglines[0])
