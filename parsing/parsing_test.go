@@ -24,8 +24,9 @@ var _ = Describe("Parsing tag, tagline and make csv", func() {
 		})
 	})
 	Context("Test Parsing", func() {
-		if wikiDir == "" {
-			wikiDir = "/home/sh/vimwiki"
+		err := getNoteDir()
+		if err != nil {
+			return
 		}
 		filename := wikiDir + "/Data_Structure.md"
 		taglines, err := getTaglines(filename)
