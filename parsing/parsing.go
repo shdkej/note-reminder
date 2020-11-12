@@ -59,6 +59,7 @@ func getTaglines(filename string) ([]string, error) {
 	if err != nil {
 		return result, err
 	}
+	log.Println("File name: ", filename)
 
 	ss := strings.Split(string(val), "\n\n"+tagPrefix)
 	for _, s := range ss {
