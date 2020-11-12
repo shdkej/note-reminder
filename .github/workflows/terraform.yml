@@ -45,12 +45,15 @@ jobs:
 
     - name: Make csv file
       env:
-        VIMWIKI: $GITHUB_WORKSPACE/shdkej.github.io/content/
+        VIMWIKI: /shdkej.github.io/content/
         CSV_PATH: ./result/tags.csv
       run: |
-        git clone https://github.com/shdkej/shdkej.github.io
+        git clone https://github.com/shdkej/shdkej.github.io /shdkej.github.io/
+        ls -al /shdkej.github.io
         cd parsing
         go test
+        #rm -r $GITHUB_WORKSPACE/shdkej.github.io
+        rm -r /shdkej.github.io
 
     - name: Upload csv file
       env:
