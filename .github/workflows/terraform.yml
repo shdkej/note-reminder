@@ -45,10 +45,10 @@ jobs:
 
     - name: Make csv file
       env:
-        VIMWIKI: $GITHUB_WORKSPACE/shdkej.github.io/content/
+        VIMWIKI: $GITHUB_WORKSPACE/shdkej.github.io/content
         CSV_PATH: ./result/tags.csv
       run: |
-        git clone https://github.com/shdkej/shdkej.github.io $GITHUB_WORKSPACE/shdkej.github.io/
+        git clone https://github.com/shdkej/shdkej.github.io
         ls -al $GITHUB_WORKSPACE
         cd parsing
         go test
