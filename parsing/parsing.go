@@ -47,7 +47,7 @@ func getTaglineAll() ([]string, error) {
 		log.Fatal(err)
 		return result, err
 	}
-	log.Println("Get Tagline All Done")
+	log.Println("Get All Tagline is Done")
 	return result, nil
 }
 
@@ -133,6 +133,6 @@ func toCSV(tags []string) error {
 		log.Fatal(err)
 		return err
 	}
-	log.Println("Successful convert to csv")
+	log.Println("Successfully convert to csv")
 	return nil
 }
