@@ -16,17 +16,17 @@ jobs:
     - uses: actions/checkout@v2
 
     - name: Get Note Directory
-      run: git clone https://github.com/shdkej/shdkej.github.io
+      run: git clone https://github.com/shdkej/shdkej.github.io /tmp/shdkej.github.io
 
     - name: Make csv file
       env:
-        VIMWIKI: $GITHUB_WORKSPACE/shdkej.github.io/content
+        VIMWIKI: /tmp/shdkej.github.io/content
         CSV_PATH: /tmp/result/tags.csv
       run: |
         cd parsing
         mkdir -p /tmp/result
         go test
-        rm -r $GITHUB_WORKSPACE/shdkej.github.io
+        rm -r $VIMWIKI
 
     - name: Upload csv file
       env:
@@ -34,6 +34,7 @@ jobs:
         AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         CSV_PATH: /tmp/result/tags.csv
       run: |
+        less $CSV_PATH
         cd lambda
         go test
         # rm $CSV_PATH
