@@ -35,8 +35,8 @@ jobs:
         CSV_PATH: /tmp/result/tags.csv
       run: |
         cd lambda
-        # go test >> $GITHUB_LOG
-        echo ::set-env name=GITHUB_LOG::$(go test)
+        go test >> $GITHUB_LOG
+        # echo ::set-env name=GITHUB_LOG::$(go test)
 
     - name: pull-request
       uses: repo-sync/pull-request@v2
