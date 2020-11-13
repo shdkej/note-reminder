@@ -49,10 +49,10 @@ jobs:
     - name: Make csv file
       env:
         VIMWIKI: $GITHUB_WORKSPACE/shdkej.github.io/content
-        CSV_PATH: $GITHUB_WORKSPACE/result/tags.csv
+        CSV_PATH: /result/tags.csv
       run: |
         cd parsing
-        mkdir -p $GITHUB_WORKSPACE/result
+        mkdir -p /result
         go test
         rm -r $GITHUB_WORKSPACE/shdkej.github.io
 
