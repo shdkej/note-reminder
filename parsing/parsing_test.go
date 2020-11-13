@@ -13,6 +13,10 @@ func TestParsing(t *testing.T) {
 
 var _ = Describe("Parsing tag, tagline and make csv", func() {
 	Context("Test CSV", func() {
+		err := getNoteDir()
+		if err != nil {
+			return
+		}
 		tags, err := getTaglineAll()
 		if err != nil {
 			return
