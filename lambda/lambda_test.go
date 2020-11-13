@@ -20,7 +20,7 @@ var _ = Describe("AWS execute test", func() {
 	Context("Test Upload S3", func() {
 		It("upload s3 tags csv", func() {
 			bucket := "my-note-0.0.1"
-			Expect(uploadS3(bucket, "")).Should(BeNil())
+			Expect(uploadS3(bucket, path)).Should(BeNil())
 		})
 	})
 })
