@@ -27,7 +27,6 @@ jobs:
         mkdir -p /tmp/result
         go test
         rm -r $GITHUB_WORKSPACE/shdkej.github.io
-        less $CSV_PATH
 
     - name: Upload csv file
       env:
@@ -35,7 +34,6 @@ jobs:
         AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         CSV_PATH: /tmp/result/tags.csv
       run: |
-        less $CSV_PATH
         cd lambda
         go test
         # rm $CSV_PATH
