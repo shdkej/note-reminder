@@ -44,6 +44,7 @@ func getTaglineAll() ([]string, error) {
 		return nil
 	})
 	if err != nil {
+		log.Fatal(err)
 		return result, err
 	}
 	log.Println("Get Tagline All Done")
@@ -63,6 +64,7 @@ func getTaglines(filename string) ([]string, error) {
 			result = append(result, s)
 		}
 	}
+	log.Println("Get Taglines from filename", filename)
 	return result, nil
 }
 
@@ -84,6 +86,7 @@ func makeCSVForm(tags []string) ([][]string, error) {
 		//tag = "\"" + tag + "\""
 		result[i] = []string{strconv.Itoa(i), tag}
 	}
+	log.Println("Successfully make csv form")
 	return result, nil
 }
 
@@ -130,5 +133,6 @@ func toCSV(tags []string) error {
 		log.Fatal(err)
 		return err
 	}
+	log.Println("Successful convert to csv")
 	return nil
 }
