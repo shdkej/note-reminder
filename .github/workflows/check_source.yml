@@ -44,4 +44,5 @@ jobs:
       with:
         destination_branch: "master"
         github_token: ${{ secrets.GITHUB_TOKEN }}
-        pr_body: "${{ steps.upload-csv.outputs.body }}"
+        # pr_body: "${{ steps.upload-csv.outputs.body }}"
+      pr_body: "test"
