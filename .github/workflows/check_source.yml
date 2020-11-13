@@ -1,5 +1,4 @@
 name: Check the Source
-
 # Controls when the action will run. Triggers the workflow on push or pull request
 # events but only for the master branch
 on:
@@ -12,8 +11,6 @@ jobs:
   build:
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
-
-    # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
     # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
     - uses: actions/checkout@v2
@@ -30,6 +27,7 @@ jobs:
         mkdir -p /tmp/result
         go test
         rm -r $GITHUB_WORKSPACE/shdkej.github.io
+        less $CSV_PATH
 
     - name: Upload csv file
       env:
@@ -37,6 +35,7 @@ jobs:
         AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         CSV_PATH: /tmp/result/tags.csv
       run: |
+        less $CSV_PATH
         cd lambda
         go test
         # rm $CSV_PATH
