@@ -36,8 +36,8 @@ jobs:
         CSV_PATH: /tmp/result/tags.csv
       run: |
         cd lambda
-        #go test
-        echo "::set-output name=body::$(go test)"
+        go test >> output.txt
+        echo "::set-output name=body::$(cat output.txt)"
 
     - name: pull-request
       uses: repo-sync/pull-request@v2
