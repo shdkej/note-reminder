@@ -37,7 +37,7 @@ jobs:
       run: |
         cd lambda
         go test >> output.txt
-        body=$(less output.txt)
+        body=$(cat output.txt)
         echo "::set-output name=$body"
 
     - name: pull-request

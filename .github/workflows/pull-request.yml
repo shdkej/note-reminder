@@ -39,5 +39,5 @@ jobs:
         AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
       run: |
         ls -al
-        cd note-reminder
+        pwd
         terraform apply -auto-approve -input=false
