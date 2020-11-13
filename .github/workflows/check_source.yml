@@ -34,13 +34,12 @@ jobs:
         AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         CSV_PATH: /tmp/result/tags.csv
       run: |
-        less $CSV_PATH
         cd lambda
         go test
         # rm $CSV_PATH
 
-    - name: Create Pull Request
-      uses: peter-evans/create-pull-request@v3
+    - name: pull-request
+      uses: repo-sync/pull-request@v2
       with:
-        token: ${{ secrets.GITHUB_TOKEN }}
-        labels: test
+        destination_branch: "main"
+        github_token: ${{ secrets.GITHUB_TOKEN }}
