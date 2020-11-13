@@ -27,6 +27,8 @@ jobs:
         mkdir -p /tmp/result
         go test
         rm -r $VIMWIKI
+      output:
+        cat /tmp/result
 
     - name: Upload csv file
       env:
@@ -35,7 +37,7 @@ jobs:
         CSV_PATH: /tmp/result/tags.csv
       run: |
         cd lambda
-        go test
+        go test >> $GITHUB_LOG
         # rm $CSV_PATH
 
     - name: pull-request
@@ -43,3 +45,4 @@ jobs:
       with:
         destination_branch: "master"
         github_token: ${{ secrets.GITHUB_TOKEN }}
+        pr_body: "${{ GITHUB_LOG }}"
