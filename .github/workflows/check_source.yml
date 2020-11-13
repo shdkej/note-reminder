@@ -37,10 +37,7 @@ jobs:
       run: |
         cd lambda
         go test >> output.txt
-        body=$(cat output.txt)
-        body="${body//'%'/'%25'}"
-        body="${body//$'\n'/'%0A'}"
-        body="${body//$'\r'/'%0D'}"
+        body=$(less output.txt)
         echo "::set-output name=$body"
 
     - name: pull-request
@@ -50,4 +47,3 @@ jobs:
         github_token: ${{ secrets.GITHUB_TOKEN }}
         pr_title: "${{ github.ref }} into master"
         pr_body: "test ${{ steps.upload-csv.outputs.body }}"
-        #pr_body: "test"
