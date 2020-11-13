@@ -28,19 +28,20 @@ jobs:
         go test
         rm -r $VIMWIKI
 
-    - name: Upload csv file
+    - id: upload-csv
+      name: Upload csv file
       env:
         AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
         AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         CSV_PATH: /tmp/result/tags.csv
       run: |
         cd lambda
-        #go test >> $GITHUB_LOG
-        echo ::set-env name=GITHUB_LOG::$(go test)
+        #go test
+        echo "::set-output name=body::$(go test)"
 
     - name: pull-request
       uses: repo-sync/pull-request@v2
       with:
         destination_branch: "master"
         github_token: ${{ secrets.GITHUB_TOKEN }}
-        pr_body: "${{ env.GITHUB_LOG }}"
+        pr_body: "${{ steps.upload-csv.outputs.body }}"
