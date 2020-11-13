@@ -53,7 +53,6 @@ jobs:
       run: |
         cd parsing
         mkdir -p $GITHUB_WORKSPACE/result
-        touch $GITHUB_WORKSPACE/result/tags.csv
         go test
         rm -r $GITHUB_WORKSPACE/shdkej.github.io
 
