@@ -1,7 +1,7 @@
 name: Terraform Apply
 
 on:
-  pull_request:
+  push:
 
 jobs:
 
@@ -19,7 +19,7 @@ jobs:
         unzip terraform_"$tf_version"_linux_amd64.zip
         sudo mv terraform /usr/local/bin/
         rm -f terraform_"$tf_version"_linux_amd64.zip
-        
+
     - name: Verify Terraform version
       run: terraform --version
 
