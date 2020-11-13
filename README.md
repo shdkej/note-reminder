@@ -11,7 +11,6 @@ Remind My note tag list
         - `export TELEGRAM_TOKEN=<Telegram token>`
         - `docker-compose up`
     - serverless
-        - local run first
         - set github secret for aws
         - `git push origin master`
 
@@ -38,11 +37,9 @@ Remind My note tag list
 - How to monitoring error?
 - note is not synchronize with local
 
-result only exist local -> s3. how to make on github
-
 #### Architecture (Serverless)
 - ~~Parsing - elasticsearch - dynamodb - lambda - telegram~~
-- github push - local note Parsing - s3
+- github push - Parsing - s3
 -    -> Execute with aws cron -> Get S3 CSV file -> Call lambda(CBR)
 -    -> (sqs - lambda(telegram))
 - And show remind list in web.
