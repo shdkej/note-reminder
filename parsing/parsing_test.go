@@ -23,21 +23,23 @@ var _ = Describe("Parsing tag, tagline and make csv", func() {
 			Expect(csv).Should(BeNil())
 		})
 	})
-	Context("Test Parsing", func() {
-		err := getNoteDir()
-		if err != nil {
-			return
-		}
-		filename := wikiDir + "/Data_Structure.md"
-		taglines, err := getTaglines(filename)
-		It("get taglines", func() {
-			Expect(taglines).NotTo(BeNil())
-			Expect(len(taglines)).NotTo(Equal(0))
-			Expect(err).Should(BeNil())
+	/*
+		Context("Test Parsing", func() {
+			err := getNoteDir()
+			if err != nil {
+				return
+			}
+			filename := wikiDir + "/Data_Structure.md"
+			taglines, err := getTaglines(filename)
+			It("get taglines", func() {
+				Expect(taglines).NotTo(BeNil())
+				Expect(len(taglines)).NotTo(Equal(0))
+				Expect(err).Should(BeNil())
+			})
+			tag := getTag(taglines[0])
+			It("get tag from tagline", func() {
+				Expect(tag).NotTo(Equal("error"))
+			})
 		})
-		tag := getTag(taglines[0])
-		It("get tag from tagline", func() {
-			Expect(tag).NotTo(Equal("error"))
-		})
-	})
+	*/
 })
