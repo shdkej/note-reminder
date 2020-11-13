@@ -27,8 +27,6 @@ jobs:
         mkdir -p /tmp/result
         go test
         rm -r $VIMWIKI
-      output:
-        cat /tmp/result
 
     - name: Upload csv file
       env:
