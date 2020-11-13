@@ -1,0 +1,48 @@
+name: Check the Source
+
+# Controls when the action will run. Triggers the workflow on push or pull request
+# events but only for the master branch
+on:
+  push:
+    branches: [ master ]
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  # This workflow contains a single job called "build"
+  build:
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+    # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+    - uses: actions/checkout@v2
+
+    - name: Get Note Directory
+      run: git clone https://github.com/shdkej/shdkej.github.io
+
+    - name: Make csv file
+      env:
+        VIMWIKI: $GITHUB_WORKSPACE/shdkej.github.io/content
+        CSV_PATH: /tmp/result/tags.csv
+      run: |
+        cd parsing
+        mkdir -p /tmp/result
+        go test
+        rm -r $GITHUB_WORKSPACE/shdkej.github.io
+
+    - name: Upload csv file
+      env:
+        AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        CSV_PATH: /tmp/result/tags.csv
+      run: |
+        cd lambda
+        go test
+        # rm $CSV_PATH
+
+    - name: Create Pull Request
+      uses: peter-evans/create-pull-request@v2
+      with:
+        token: ${{ secrets.GITHUB_TOKEN }}
+        labels: test
