@@ -29,10 +29,10 @@ jobs:
         AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
         AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
       run: |
+        cd ..
         terraform init -input=false
         ls -al
         pwd
-        cd ..
 
     - name: Terraform validation
       run: terraform validate
@@ -42,5 +42,6 @@ jobs:
         AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
         AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
       run: |
+        cd ..
         pwd
         terraform apply -auto-approve -input=false
