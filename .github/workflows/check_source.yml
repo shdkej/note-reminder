@@ -39,6 +39,7 @@ jobs:
         go test >> output.txt
         body=$(cat output.txt)
         echo "::set-output body=$body"
+        cat output.txt
 
     - name: pull-request
       uses: repo-sync/pull-request@v2
