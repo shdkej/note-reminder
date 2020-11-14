@@ -38,7 +38,7 @@ jobs:
         cd lambda
         go test >> output.txt
         body=$(cat output.txt)
-        echo "::set-output name=$body"
+        echo "::set-output body=$body"
 
     - name: pull-request
       uses: repo-sync/pull-request@v2
