@@ -41,7 +41,7 @@ jobs:
         cd lambda
         go test >> output.txt
         body=$(cat output.txt)
-        echo "::set-output body=$body"
+        echo "::set-output name=body::$body"
         echo "test ----------------------------"
         echo "${{ steps.upload-csv.outputs.body }}"
 
