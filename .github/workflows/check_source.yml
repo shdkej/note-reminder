@@ -52,3 +52,11 @@ jobs:
         github_token: ${{ secrets.GITHUB_TOKEN }}
         pr_title: "${{ github.ref }} into master"
         pr_body: "test ${{ steps.upload-csv.outputs.body }}"
+
+    - name: Publish Unit Test Results
+      uses: EnricoMi/publish-unit-test-result-action@v1.4
+      if: always()
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        check_name: Unit Test Results
+        files: lambda/output.txt
