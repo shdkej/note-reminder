@@ -12,7 +12,10 @@ jobs:
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
     steps:
-    # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+    - uses: Jerome1337/goimports-action@v1.0.2
+      with:
+        goimports-path: './parsing'
+
     - uses: actions/checkout@v2
 
     - name: Get Note Directory
@@ -39,7 +42,8 @@ jobs:
         go test >> output.txt
         body=$(cat output.txt)
         echo "::set-output body=$body"
-        cat output.txt
+        echo "test ----------------------------"
+        echo "${{ steps.upload-csv.outputs.body }}"
 
     - name: pull-request
       uses: repo-sync/pull-request@v2
