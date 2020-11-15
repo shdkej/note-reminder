@@ -25,17 +25,17 @@ Remind My note tag list
 - [X] python recommend program, csv file to s3,
 - [X] mget err check
 - [X] cron every day
-- [ ] github action for make csv and upload to s3
+- [x] github action for make csv and upload to s3
 - [ ] if search tag, show relate tag
 - [ ] make tagline parsing algorithm better
-- [ ] parsing - s3 upload in local (Need Automation)
 - [ ] error monitoring
+- [ ] github action terraform apply
+- [ ] log to pull request message
 
 #### Problem
 - Even though small architecture. it has chaotic. hard to managing
 - every service need fail control
 - How to monitoring error?
-- note is not synchronize with local
 
 #### Architecture (Serverless)
 - ~~Parsing - elasticsearch - dynamodb - lambda - telegram~~
