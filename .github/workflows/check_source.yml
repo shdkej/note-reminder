@@ -12,11 +12,12 @@ jobs:
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
     steps:
-    - uses: Jerome1337/goimports-action@v1.0.2
-      with:
-        goimports-path: './parsing'
-
     - uses: actions/checkout@v2
+
+    - name: Test Code
+      run: |
+        go test -short -coverprofile cover.out -covermode=atomic
+        cat cover.out >> coverage.txt
 
     - name: Get Note Directory
       run: git clone https://github.com/shdkej/shdkej.github.io /tmp/shdkej.github.io
@@ -42,8 +43,12 @@ jobs:
         go test >> output.txt
         body=$(cat output.txt)
         echo "::set-output name=body::$body"
-        echo "test ----------------------------"
-        echo "${{ steps.upload-csv.outputs.body }}"
+
+    - name: Report Codecov
+      uses: codecov/codecov-action@v1
+      with:
+        token: ${{secrets.CODECOV_TOKEN}}
+        file: ./coverage.txt
 
     - name: pull-request
       uses: repo-sync/pull-request@v2
@@ -52,11 +57,3 @@ jobs:
         github_token: ${{ secrets.GITHUB_TOKEN }}
         pr_title: "${{ github.ref }} into master"
         pr_body: "test ${{ steps.upload-csv.outputs.body }}"
-
-    - name: Publish Unit Test Results
-      uses: EnricoMi/publish-unit-test-result-action@v1.4
-      if: always()
-      with:
-        github_token: ${{ secrets.GITHUB_TOKEN }}
-        check_name: Unit Test Results
-        files: lambda/output.txt
