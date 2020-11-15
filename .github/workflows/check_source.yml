@@ -29,7 +29,8 @@ jobs:
 
     - name: Test Code
       run: |
-        go test -short -coverprofile cover.out ./parsing
+        cd parsing
+        go test -short -coverprofile cover.out
         cat cover.out >> coverage.txt
 
     - id: upload-csv
