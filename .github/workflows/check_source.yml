@@ -14,11 +14,6 @@ jobs:
     steps:
     - uses: actions/checkout@v2
 
-    - name: Test Code
-      run: |
-        go test -short -coverprofile cover.out ./parsing
-        cat cover.out >> coverage.txt
-
     - name: Get Note Directory
       run: git clone https://github.com/shdkej/shdkej.github.io /tmp/shdkej.github.io
 
@@ -31,6 +26,11 @@ jobs:
         mkdir -p /tmp/result
         go test
         rm -r $VIMWIKI
+
+    - name: Test Code
+      run: |
+        go test -short -coverprofile cover.out ./parsing
+        cat cover.out >> coverage.txt
 
     - id: upload-csv
       name: Upload csv file
