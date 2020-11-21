@@ -51,10 +51,28 @@ jobs:
         token: ${{secrets.CODECOV_TOKEN}}
         file: ./coverage.txt
 
-    - name: pull-request
-      uses: repo-sync/pull-request@v2
+        #- name: pull-request
+        #uses: repo-sync/pull-request@v2
+        #with:
+        #destination_branch: "master"
+        #github_token: ${{ secrets.GITHUB_TOKEN }}
+        #pr_title: "${{ github.ref }} into master"
+        #pr_body: "test ${{ steps.upload-csv.outputs.body }}"
+
+    - name: upload for share
+      uses: actions/upload-artifact@v1
       with:
-        destination_branch: "master"
-        github_token: ${{ secrets.GITHUB_TOKEN }}
-        pr_title: "${{ github.ref }} into master"
-        pr_body: "test ${{ steps.upload-csv.outputs.body }}"
+        name: output
+        path: lambda
+
+    - name: download folder
+      uses: actions/download-artifact@v1
+      with:
+          name: output
+
+    - name: comment PR
+      uses: machine-learning-apps/pr-comment@master
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        path: lambda/output.txt
