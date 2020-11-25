@@ -57,10 +57,3 @@ jobs:
         github_token: ${{ secrets.GITHUB_TOKEN }}
         pr_title: "${{ github.ref }} into master"
         pr_body: "test ${{ steps.upload-csv.outputs.body }}"
-
-    - name: Add checkout commands
-      uses: harupy/comment-on-pr@master
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN}}
-      with:
-        filename: lambda/output.txt
