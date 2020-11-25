@@ -31,7 +31,6 @@ jobs:
       run: |
         cd parsing
         go test -race -coverprofile=coverage.txt -covermode=atomic
-        bash <(curl -s https://codecov.io/bash)
 
     - name: Report Codecov
       uses: codecov/codecov-action@v1
@@ -47,7 +46,7 @@ jobs:
         CSV_PATH: /tmp/result/tags.csv
       run: |
         cd lambda
-        go test -coverprofile=output.txt
+        go test -cover -v > output.txt
         body=$(cat output.txt)
         body="${body//'%'/'%25'}"
         body="${body//$'\n'/'%0A'}"
@@ -60,4 +59,4 @@ jobs:
         destination_branch: "master"
         github_token: ${{ secrets.GITHUB_TOKEN }}
         pr_title: "${{ github.ref }} into master"
-        pr_body: "test ${{ steps.upload-csv.outputs.body }}"
+        pr_body: "${{ steps.upload-csv.outputs.body }}"
