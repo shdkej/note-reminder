@@ -30,8 +30,13 @@ jobs:
     - name: Test Code
       run: |
         cd parsing
-        go test -short -coverprofile cover.out
-        cat cover.out >> coverage.txt
+        go test -race -coverprofile=coverage.txt -covermode=atomic
+
+    - name: Report Codecov
+      uses: codecov/codecov-action@v1
+      with:
+        token: ${{secrets.CODECOV_TOKEN}}
+        file: ./coverage.txt
 
     - id: upload-csv
       name: Upload csv file
@@ -44,12 +49,6 @@ jobs:
         go test >> output.txt
         body=$(cat output.txt)
         echo "::set-output name=body::$body"
-
-    - name: Report Codecov
-      uses: codecov/codecov-action@v1
-      with:
-        token: ${{secrets.CODECOV_TOKEN}}
-        file: ./coverage.txt
 
     - name: pull-request
       uses: repo-sync/pull-request@v2
