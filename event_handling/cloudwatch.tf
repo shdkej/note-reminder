@@ -1,7 +1,7 @@
 resource "aws_cloudwatch_event_rule" "every_day" {
     name = "every-day-cron"
     description = "Execute Every day"
-    schedule_expression = "cron(0 20 * * ? *)"
+    schedule_expression = "cron(0 12 * * ? *)"
 }
 
 resource "aws_cloudwatch_event_target" "check_lambda" {
