@@ -19,6 +19,9 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v2
 
+    - name: Zip recommand directory
+      run: sh build_zip.sh
+
     # Install the latest version of Terraform CLI and configure the Terraform CLI configuration file with a Terraform Cloud user API token
     - name: Setup Terraform
       uses: hashicorp/setup-terraform@v1
@@ -47,4 +50,3 @@ jobs:
         AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
       if: github.ref == 'refs/heads/master' && github.event_name == 'push'
       run: terraform apply -auto-approve
-
