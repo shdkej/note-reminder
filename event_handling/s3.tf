@@ -1,6 +1,6 @@
 resource "aws_s3_bucket" "upload" {
   bucket = "${var.s3_bucket_upload_name}-${var.s3_version}"
-  acl = "public-read"
+  acl = "private"
 
   tags = {
     Name = "Website"
