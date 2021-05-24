@@ -6,5 +6,5 @@ find . -name "__pycache__" -type d -exec rm -rf {} +
 rm -rf numpy* bin dateutil threadpoolctl.py six.py scipy*
 zip -r ../event_handling/recommand.zip .
 cd ../event_handling
-zip -r recommand.zip recommender_system.py
+zip -r recommend.zip recommender_system.py
 cd ../
