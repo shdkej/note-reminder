@@ -19,7 +19,7 @@ Remind My note tag list
 - [x] send telegram
 - [x] send sqs
 - [x] sqs to lambda
-- [x] make index file
+- [X] make index file
 - [X] tag, tagline match conflict content check
 - [X] save tag with file
 - [X] python recommend program, csv file to s3,
