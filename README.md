@@ -74,3 +74,6 @@ Remind My note tag list
     - last update
     - weight
 - Content Based Recommend
+
+### Infrastructure model
+![shdkej_note-reminder](https://github.com/shdkej/note-reminder/assets/173192552/430fa194-b3da-43db-b8e0-a7bf2ff8d020)
