@@ -39,6 +39,17 @@ Remind My note tag list
 
 #### Architecture (Serverless)
 - ~~Parsing - elasticsearch - dynamodb - lambda - telegram~~
+```mermaid
+flowchart LR
+  A[GitHub Push] --> B[Parsing]
+  B --> C[S3: tags.csv]
+  D[AWS Cron] --> E[Download CSV]
+  E --> F[Lambda: CBR]
+  F --> G[SNS]
+  G --> H[SQS]
+  H --> I[Lambda: Telegram]
+  F --> J[Web: Remind List]
+```
 - github push - Parsing - s3
 -    -> Execute with aws cron -> Get S3 CSV file -> Call lambda(CBR)
 -    -> (sqs - lambda(telegram))
