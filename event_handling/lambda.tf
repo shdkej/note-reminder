@@ -19,6 +19,44 @@ resource "aws_iam_role" "lambda_exec" {
 EOF
 }
 
+# CloudWatch Logs 권한
+resource "aws_iam_role_policy_attachment" "lambda_logs" {
+  role       = aws_iam_role.lambda_exec.name
+  policy_arn = "arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+}
+
+# S3 읽기 + SQS 발송 권한
+resource "aws_iam_role_policy" "lambda_permissions" {
+  name = "lambda-permissions-policy"
+  role = aws_iam_role.lambda_exec.id
+
+  policy = jsonencode({
+    Version = "2012-10-17"
+    Statement = [
+      {
+        Effect = "Allow"
+        Action = [
+          "s3:GetObject",
+          "s3:ListBucket"
+        ]
+        Resource = [
+          "arn:aws:s3:::${var.s3_bucket_upload_name}-${var.s3_version}",
+          "arn:aws:s3:::${var.s3_bucket_upload_name}-${var.s3_version}/*"
+        ]
+      },
+      {
+        Effect = "Allow"
+        Action = [
+          "sqs:SendMessage"
+        ]
+        Resource = [
+          aws_sqs_queue.upload.arn
+        ]
+      }
+    ]
+  })
+}
+
 resource "aws_lambda_function" "cbr" {
   function_name = "sns-sqs-upload-cbr"
   s3_bucket = "${var.s3_bucket_upload_name}-${var.s3_version}"
@@ -29,7 +67,7 @@ resource "aws_lambda_function" "cbr" {
   runtime = "python3.6"
   role = aws_iam_role.lambda_exec.arn
   memory_size = 1024
-  timeout = 5
+  timeout = 60
 }
 
 resource "aws_lambda_permission" "sns" {
