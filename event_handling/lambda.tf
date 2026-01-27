@@ -26,35 +26,34 @@ resource "aws_iam_role_policy_attachment" "lambda_logs" {
 }
 
 # S3 읽기 + SQS 발송 권한
-resource "aws_iam_role_policy" "lambda_permissions" {
-  name = "lambda-permissions-policy"
-  role = aws_iam_role.lambda_exec.id
-
-  policy = jsonencode({
-    Version = "2012-10-17"
-    Statement = [
-      {
-        Effect = "Allow"
-        Action = [
-          "s3:GetObject",
-          "s3:ListBucket"
-        ]
-        Resource = [
-          "arn:aws:s3:::${var.s3_bucket_upload_name}-${var.s3_version}",
-          "arn:aws:s3:::${var.s3_bucket_upload_name}-${var.s3_version}/*"
-        ]
-      },
-      {
-        Effect = "Allow"
-        Action = [
-          "sqs:SendMessage"
-        ]
-        Resource = [
-          aws_sqs_queue.upload.arn
-        ]
-      }
+data "aws_iam_policy_document" "lambda_permissions" {
+  statement {
+    effect = "Allow"
+    actions = [
+      "s3:GetObject",
+      "s3:ListBucket"
     ]
-  })
+    resources = [
+      "arn:aws:s3:::${var.s3_bucket_upload_name}-${var.s3_version}",
+      "arn:aws:s3:::${var.s3_bucket_upload_name}-${var.s3_version}/*"
+    ]
+  }
+
+  statement {
+    effect = "Allow"
+    actions = [
+      "sqs:SendMessage"
+    ]
+    resources = [
+      aws_sqs_queue.upload.arn
+    ]
+  }
+}
+
+resource "aws_iam_role_policy" "lambda_permissions" {
+  name   = "lambda-permissions-policy"
+  role   = aws_iam_role.lambda_exec.id
+  policy = data.aws_iam_policy_document.lambda_permissions.json
 }
 
 resource "aws_lambda_function" "cbr" {
