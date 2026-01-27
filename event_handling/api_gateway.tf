@@ -49,7 +49,16 @@ resource "aws_api_gateway_deployment" "lambda" {
     aws_api_gateway_integration.integration_root,
   ]
   rest_api_id = aws_api_gateway_rest_api.api.id
-  stage_name = "test"
+
+  lifecycle {
+    create_before_destroy = true
+  }
+}
+
+resource "aws_api_gateway_stage" "lambda" {
+  deployment_id = aws_api_gateway_deployment.lambda.id
+  rest_api_id   = aws_api_gateway_rest_api.api.id
+  stage_name    = "test"
 }
 
 resource "aws_lambda_permission" "apigw" {
@@ -58,9 +67,9 @@ resource "aws_lambda_permission" "apigw" {
   function_name = aws_lambda_function.cbr.arn
   principal = "apigateway.amazonaws.com"
 
-  source_arn = "${aws_api_gateway_deployment.lambda.execution_arn}/*/*"
+  source_arn = "${aws_api_gateway_stage.lambda.execution_arn}/*/*"
 }
 
 output "lambda_api" {
-  value = aws_api_gateway_deployment.lambda.invoke_url
+  value = aws_api_gateway_stage.lambda.invoke_url
 }
