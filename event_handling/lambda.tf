@@ -62,7 +62,7 @@ resource "aws_lambda_function" "cbr" {
   s3_key = var.s3-key
   handler = var.lambda-handler
   layers = ["arn:aws:lambda:eu-central-1:292169987271:layer:AWSLambda-Python38-SciPy1x:29"]
-  //source_code_hash = base64sha256(var.s3-source)
+  source_code_hash = filebase64sha256(var.s3-source)
   runtime = "python3.8"
   role = aws_iam_role.lambda_exec.arn
   memory_size = 1024
