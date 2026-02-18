@@ -103,7 +103,7 @@ def getRecommend(event, context):
 
 def setOutput(content):
     body = list(map(lambda b: b.replace("==", "\n"), content))
-    result = list(map(lambda a: "*" + a.split("\n", 1)[0] + "*\n" + a.split("\n", 1)[-1], body))
-    result.append("wasm.shdkej.com")
+    result = list(map(lambda a: "**" + a.split("\n", 1)[0] + "**" + a.split("\n", 1)[-1] + "\n", body))
+    result.append("shdkej.com")
     return result
 
