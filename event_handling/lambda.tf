@@ -58,8 +58,9 @@ resource "aws_iam_role_policy" "lambda_permissions" {
 
 resource "aws_lambda_function" "cbr" {
   function_name = "sns-sqs-upload-cbr"
-  s3_bucket = "${var.s3_bucket_upload_name}-${var.s3_version}"
-  s3_key = var.s3-key
+  s3_bucket = aws_s3_bucket_object.python.bucket
+  s3_key = aws_s3_bucket_object.python.key
+  s3_object_version = aws_s3_bucket_object.python.version_id
   handler = var.lambda-handler
   layers = ["arn:aws:lambda:eu-central-1:292169987271:layer:AWSLambda-Python38-SciPy1x:29"]
   source_code_hash = filebase64sha256(var.s3-source)
