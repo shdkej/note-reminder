@@ -53,7 +53,7 @@ def setOutput(data):
     lines.append(f"📌 *{source_title}*")
     if source_body:
         lines.append(source_body)
-    lines.append("\n━━━━━━━━━━\n")
+    lines.append("\n━━━━━━━━━\n")
 
     for i, (text, score) in enumerate(data['recommendations']):
         item_text = text.replace("==", "\n")
