@@ -29,25 +29,46 @@ def item(id):
 # Just reads the results out of the dictionary.
 def recommend(item_id, num):
     recs = results[item_id][:num]
-    result = []
-    result.append("Recommending about -- " + item(item_id))
-    result.append("-------------------\n")
-    for rec in recs:
-        result.append(item(rec[1]))
-    return result
+    return {
+        'source': item(item_id),
+        'recommendations': [(item(rec[1]), rec[0]) for rec in recs]
+    }
 
 def getRecommend():
     contentBasedRecommend()
     num = random.randrange(len(ds))
-    result_array = recommend(item_id=num, num=5)
-    message = setOutput(result_array)
+    result_data = recommend(item_id=num, num=5)
+    message = setOutput(result_data)
     send_message(message)
 
-def setOutput(content):
-    body = list(map(lambda b: b.replace("==", "\n"), content))
-    result = list(map(lambda a: "*" + a.split("\n", 1)[0] + "*\n" + a.split("\n", 1)[-1] + "\n\n", body))
-    result.append("shdkej.com")
-    return result
+NUM_EMOJIS = ['1️⃣', '2️⃣', '3️⃣', '4️⃣', '5️⃣']
+
+def setOutput(data):
+    source_text = data['source'].replace("==", "\n")
+    source_title = source_text.split("\n", 1)[0]
+    source_body = source_text.split("\n", 1)[-1] if "\n" in source_text else ""
+
+    lines = []
+    lines.append("📚 *추천 노트*\n")
+    lines.append(f"📌 *{source_title}*")
+    if source_body:
+        lines.append(source_body)
+    lines.append("\n━━━━━━━━━━\n")
+
+    for i, (text, score) in enumerate(data['recommendations']):
+        item_text = text.replace("==", "\n")
+        title = item_text.split("\n", 1)[0]
+        body = item_text.split("\n", 1)[-1] if "\n" in item_text else ""
+        score_pct = int(score * 100)
+        emoji = NUM_EMOJIS[i] if i < len(NUM_EMOJIS) else f"{i+1}."
+
+        lines.append(f"{emoji} *{title}* ({score_pct}%)")
+        if body:
+            lines.append(body)
+        lines.append("")
+
+    lines.append("🔗 shdkej.com")
+    return "\n".join(lines)
 
 
 getRecommend()
